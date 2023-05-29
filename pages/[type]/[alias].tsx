@@ -11,6 +11,9 @@ import { PageComponent } from "@/page-components";
 import { API } from "@/helpers/api";
 
 function Page({ page, products, firstCategory }: PageProps): JSX.Element {
+	if (!page) {
+		return <></>;
+	}
 	return (
 		<PageComponent
 			firstCategory={firstCategory}
@@ -42,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async ({
 	params
 }: GetStaticPropsContext<ParsedUrlQuery>) => {
-	if (!params) {
+	if (!params || !params.type || !params.alias) {
 		return {
 			notFound: true
 		};
