@@ -1,35 +1,37 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-	reactStrictMode: true,
-	images: {
-		domains: ["play-lh.googleusercontent.com"]
-	},
-	webpack(config, options) {
-		config.module.rules.push({
-			loader: "@svgr/webpack",
-			issuer: /\.[jt]sx?$/,
-			options: {
-				prettier: false,
-				svgo: true,
-				svgoConfig: {
-					plugins: [
-						{
-							name: "preset-default",
-							params: {
-								overrides: {
-									removeViewBox: false
+module.exports = () => {
+	require("dotenv").config({ path: "path/to/.env.production" });
+	const nextConfig = {
+		reactStrictMode: true,
+		images: {
+			domains: ["play-lh.googleusercontent.com"]
+		},
+		webpack(config, options) {
+			config.module.rules.push({
+				loader: "@svgr/webpack",
+				issuer: /\.[jt]sx?$/,
+				options: {
+					prettier: false,
+					svgo: true,
+					svgoConfig: {
+						plugins: [
+							{
+								name: "preset-default",
+								params: {
+									overrides: {
+										removeViewBox: false
+									}
 								}
 							}
-						}
-					]
+						]
+					},
+					titleProp: true
 				},
-				titleProp: true
-			},
-			test: /\.svg$/
-		});
+				test: /\.svg$/
+			});
 
-		return config;
-	}
+			return config;
+		}
+	};
+
+	return nextConfig;
 };
-
-module.exports = nextConfig;
