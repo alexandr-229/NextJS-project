@@ -1,4 +1,4 @@
-FROM node:20-alpine
+FROM node:18-alpine
 WORKDIR /
 ADD package.json package.json
 RUN npm install --force
