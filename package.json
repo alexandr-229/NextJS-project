@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "next dev",
 		"debug": "NODE_OPTIONS='--inspect' next dev",
-		"build": "NODE_ENV=production next build",
-		"start": "NODE_ENV=production next start",
+		"build": "next build",
+		"start": "next start",
 		"lint": "next lint",
 		"stylelint": "stylelint \"**/*.css\"",
 		"stylelint:fix": "stylelint \"**/*.css\" --fix"
