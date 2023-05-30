@@ -1,5 +1,6 @@
-FROM node:19.5.0-alpine
+FROM node:20
 WORKDIR /
+RUN npm install -g npm@9.6.7
 ADD package.json package.json
 RUN npm install --force
 ADD . .
