@@ -64,7 +64,7 @@ export const PageComponent = ({
 			)}
 			<HTag tag="h2">New skills</HTag>
 			{page.tags.map((tag) => (
-				<Tag key={tag} color="primary" size="large">
+				<Tag key={tag} color="primary" size="large" className={styles.tag}>
 					{tag}
 				</Tag>
 			))}

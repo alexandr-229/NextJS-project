@@ -15,6 +15,10 @@
 	gap: 20px;
 }
 
+.tag {
+	margin-bottom: 6px;
+}
+
 @media (max-width: 640px) {
 	.title {
 		grid-template-columns: auto 1fr;
