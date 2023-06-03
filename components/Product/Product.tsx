@@ -1,6 +1,5 @@
 import { ForwardedRef, forwardRef, useRef, useState } from "react";
 import styles from "./Product.module.css";
-import cn from "classnames";
 import { ProductProps } from "./Product.props";
 import { Card } from "../Card/Card";
 import { Rating } from "../Rating/Rating";
@@ -27,6 +26,18 @@ export const Product = motion(
 					behavior: "smooth",
 					block: "start"
 				});
+			};
+
+			const variants = {
+				hidden: {
+					height: 0,
+					opacity: 0,
+					overflow: "hidden"
+				},
+				visible: {
+					height: "auto",
+					opacity: 1
+				}
 			};
 
 			return (
@@ -115,21 +126,20 @@ export const Product = motion(
 							</Button>
 						</div>
 					</Card>
-					<Card
-						color="blue"
-						className={cn(styles.reviews, {
-							[styles.opened]: isReviewOpened,
-							[styles.closed]: !isReviewOpened
-						})}
-						ref={reviewRef}>
-						{product.reviews.map((review) => (
-							<div key={review._id}>
-								<Review review={review} />
-								<Devider />
-							</div>
-						))}
-						<ReviewForm productId={product._id} />
-					</Card>
+					<motion.div
+						variants={variants}
+						animate={isReviewOpened ? "visible" : "hidden"}
+						initial="hidden">
+						<Card color="blue" className={styles.reviews} ref={reviewRef}>
+							{product.reviews.map((review) => (
+								<div key={review._id}>
+									<Review review={review} />
+									<Devider />
+								</div>
+							))}
+							<ReviewForm productId={product._id} />
+						</Card>
+					</motion.div>
 				</div>
 			);
 		}

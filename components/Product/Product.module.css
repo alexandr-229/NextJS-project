@@ -1,4 +1,5 @@
 .product {
+	margin-top: 30px;
 	padding: 30px;
 	display: grid;
 	grid-template-columns: 70px 30px calc(50% - 100px) auto 40px auto 40px auto;
@@ -183,19 +184,8 @@
 	margin-bottom: 5px;
 }
 
-.closed {
-	overflow: hidden;
-	max-height: 0;
-	padding: 0;
-}
-
-.opened {
-	max-height: auto;
-	padding: 30px;
-}
-
 .reviews {
-	margin-bottom: 30px;
+	padding: 30px;
 }
 
 @media (max-width: 1320px) {

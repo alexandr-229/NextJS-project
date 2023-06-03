@@ -1,3 +1,21 @@
+import { useEffect, useState } from "react";
+
 export const useScrollY = (): number => {
-	return 1;
+	const [scrollY, setScrollY] = useState<number>(0);
+	const isBrowser = typeof window !== "undefined";
+
+	useEffect(() => {
+		window.addEventListener("scroll", handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
+	const handleScroll = () => {
+		const currentScrellY = isBrowser ? window.scrollY : 0;
+		setScrollY(currentScrellY);
+	};
+
+	return scrollY;
 };

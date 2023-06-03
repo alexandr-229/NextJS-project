@@ -14,6 +14,8 @@ import { Product } from "./Product/Product";
 import { Devider } from "./Devider/Devider";
 import { Review } from "./Review/Review";
 import { ReviewForm } from "./ReviewFrom/ReviewForm";
+import { Up } from "./Up/Up";
+import { ButtonIcon } from "./ButtonIcon/ButtonIcon";
 
 export {
 	Button,
@@ -31,5 +33,7 @@ export {
 	Product,
 	Devider,
 	Review,
-	ReviewForm
+	ReviewForm,
+	Up,
+	ButtonIcon
 };
