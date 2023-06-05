@@ -34,7 +34,7 @@ export const sortReducer: Reducer<SortReducerState, SortActions> = (
 			return {
 				sort: SortEnum.Price,
 				products: state.products.sort((a: ProductModel, b: ProductModel) => {
-					return a.price > b.price ? 1 : -1;
+					return a.price > b.price ? -1 : 1;
 				})
 			};
 		}
