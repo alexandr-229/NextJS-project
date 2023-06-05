@@ -10,6 +10,11 @@
 	cursor: pointer;
 }
 
+.firstLevelList {
+	list-style: none;
+	padding: 0;
+}
+
 .firstLevelActive,
 .firstLevel:hover {
 	color: var(--primary);
@@ -26,18 +31,24 @@
 	text-transform: uppercase;
 	color: var(--gray-dark);
 	font-size: 12px;
-	line-height: 16px;
+	outline-offset: -1px;
+	border: none;
+	background: none;
+	padding: 0;
 }
 
 .secondBlock {
 	margin-left: 12px;
-	padding-left: 32px;
+	padding: 0 0 0 32px;
 	margin-top: 15px;
 	border-left: 1px solid #dfdfdf;
+	list-style: none;
 }
 
 .secondLevelBlock {
 	overflow: hidden;
+	list-style: none;
+	padding: 0;
 }
 
 .thirdLevel {
@@ -47,10 +58,17 @@
 	color: var(--gray-dark);
 	font-weight: 500;
 	font-size: 14px;
-	line-height: 19px;
+	outline-offset: -1px;
 }
 
 .thirdLevelActive,
 .thirdLevel:hover {
 	color: var(--primary);
+}
+
+.visualyHidden {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
 }

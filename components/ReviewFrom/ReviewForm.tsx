@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, KeyboardEvent } from "react";
 import styles from "./ReviewForm.module.css";
 import cn from "classnames";
 import { ReviewFormProps } from "./ReviewForm.props";
@@ -12,6 +12,7 @@ import { API } from "@/helpers/api";
 export const ReviewForm = ({
 	className,
 	productId,
+	isOpened,
 	...props
 }: ReviewFormProps): JSX.Element => {
 	const {
@@ -19,7 +20,8 @@ export const ReviewForm = ({
 		control,
 		reset,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		clearErrors
 	} = useForm<IReviewForm>();
 	const [isSuccess, setIsSuccess] = useState<boolean>(false);
 	const [isError, setIsError] = useState<boolean>(false);
@@ -45,6 +47,16 @@ export const ReviewForm = ({
 		}
 	};
 
+	const closeModal = (
+		event: KeyboardEvent,
+		func: typeof setIsSuccess | typeof setIsError
+	) => {
+		if (event.code === "Enter" || event.code === "Space") {
+			event.preventDefault();
+			func(false);
+		}
+	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<div className={cn(styles.reviewForm, className)} {...props}>
@@ -54,6 +66,8 @@ export const ReviewForm = ({
 						required: { value: true, message: "Name is required filed" }
 					})}
 					error={errors.name}
+					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={!!errors.name}
 				/>
 				<Input
 					placeholder="Title"
@@ -62,6 +76,8 @@ export const ReviewForm = ({
 						required: { value: true, message: "Title is required filed" }
 					})}
 					error={errors.title}
+					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={!!errors.title}
 				/>
 				<div className={styles.rating}>
 					<span>Rating</span>
@@ -81,6 +97,7 @@ export const ReviewForm = ({
 								setRating={field.onChange}
 								ref={field.ref}
 								error={errors.rating}
+								tabIndex={isOpened ? 0 : -1}
 							/>
 						)}
 					/>
@@ -88,13 +105,21 @@ export const ReviewForm = ({
 				<Textarea
 					className={styles.description}
 					placeholder="Text"
+					aria-label="Specify the text of the review"
 					{...register("description", {
 						required: { value: true, message: "Text is required filed" }
 					})}
 					error={errors.description}
+					tabIndex={isOpened ? 0 : -1}
+					aria-invalid={!!errors.description}
 				/>
 				<div className={styles.submit}>
-					<Button appearance="primary">Send</Button>
+					<Button
+						appearance="primary"
+						tabIndex={isOpened ? 0 : -1}
+						onClick={() => clearErrors()}>
+						Send
+					</Button>
 					<span className={styles.info}>
 						* Before publication, the review will be pre-moderated and checked
 					</span>
@@ -102,23 +127,33 @@ export const ReviewForm = ({
 			</div>
 			{isSuccess && (
 				<div className={cn(styles.success, styles.panel)}>
-					<div className={styles.panelTitle}>Review sent</div>
+					<div className={styles.panelTitle} role="alert">
+						Review sent
+					</div>
 					<div>Thank you, your review will be published after verification</div>
-					<CloseIcon
+					<button
+						aria-label="Close modal"
 						className={styles.close}
 						onClick={() => setIsSuccess(false)}
-					/>
+						onKeyDown={(event: KeyboardEvent) =>
+							closeModal(event, setIsSuccess)
+						}>
+						<CloseIcon />
+					</button>
 				</div>
 			)}
 			{isError && (
 				<div className={cn(styles.error, styles.panel)}>
-					<div className={styles.panelTitle}>
+					<div className={styles.panelTitle} role="alert">
 						Something went wrong, try to reload the page
 					</div>
-					<CloseIcon
+					<button
+						aria-label="Close modal"
 						className={styles.close}
 						onClick={() => setIsError(false)}
-					/>
+						onKeyDown={(event: KeyboardEvent) => closeModal(event, setIsError)}>
+						<CloseIcon />
+					</button>
 				</div>
 			)}
 		</form>

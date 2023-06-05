@@ -6,6 +6,7 @@ import { TopLevelCategory } from "@/interfaces/page.interface";
 import { SortEnum } from "@/components/Sort/Sort.props";
 import { SortReducerState, sortReducer } from "./sort.reducer";
 import { Product } from "@/components";
+import { useReducedMotion } from "framer-motion";
 
 export const PageComponent = ({
 	page,
@@ -20,6 +21,7 @@ export const PageComponent = ({
 		sortReducer,
 		initialState
 	);
+	const shouldReduceMotion = useReducedMotion();
 
 	useEffect(() => {
 		dispatchSort({ type: "CHANGE_PRODUCTS", payload: products });
@@ -34,15 +36,15 @@ export const PageComponent = ({
 			<div className={styles.title}>
 				<HTag tag="h1">{page.title}</HTag>
 				{products && (
-					<Tag color="grey" size="large">
+					<Tag color="grey" size="large" aria-label={products.length + "items"}>
 						{products.length}
 					</Tag>
 				)}
 				<Sort sort={sort} setSort={setSort} />
 			</div>
-			<div>
+			<div role={"list"}>
 				{sortedProducts.map((p) => (
-					<Product layout product={p} key={p._id} />
+					<Product layout={!shouldReduceMotion} product={p} key={p._id} />
 				))}
 			</div>
 			{firstCategory === TopLevelCategory.Courses && page.justjoinit && (

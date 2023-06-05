@@ -188,6 +188,13 @@
 	padding: 30px;
 }
 
+.visualyHidden {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
 @media (max-width: 1320px) {
 	.product {
 		padding: 20px;

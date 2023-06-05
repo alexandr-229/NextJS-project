@@ -26,6 +26,7 @@ export const Product = motion(
 					behavior: "smooth",
 					block: "start"
 				});
+				reviewRef.current?.focus();
 			};
 
 			const variants = {
@@ -41,7 +42,7 @@ export const Product = motion(
 			};
 
 			return (
-				<div {...props} ref={ref}>
+				<div {...props} ref={ref} role={"listitem"}>
 					<Card className={styles.product}>
 						<div className={styles.logo}>
 							<Image
@@ -53,18 +54,26 @@ export const Product = motion(
 						</div>
 						<div className={styles.title}>{product.title}</div>
 						<div className={styles.price}>
-							{priceEn(product.price)}
+							<span>
+								<span className={styles.visualyHidden}>Price</span>
+								{priceEn(product.price)}
+							</span>
 							{product.oldPrice && (
 								<Tag className={styles.oldPrice} color="green">
+									<span className={styles.visualyHidden}>Discount</span>
 									{priceEn(product.price - product.oldPrice)}
 								</Tag>
 							)}
 						</div>
 						<div className={styles.credit}>
+							<span className={styles.visualyHidden}>Credit</span>
 							{priceEn(product.credit)}/
 							<span className={styles.month}>Months</span>
 						</div>
 						<div className={styles.rating}>
+							<span className={styles.visualyHidden}>
+								Rating {product.reviewAvg || 0}
+							</span>
 							<Rating rating={product.reviewAvg || 0} />
 						</div>
 						<div className={styles.tags}>
@@ -74,8 +83,12 @@ export const Product = motion(
 								</Tag>
 							))}
 						</div>
-						<div className={styles.priceTitle}>Price</div>
-						<div className={styles.creditTitle}>Credit</div>
+						<div className={styles.priceTitle} aria-hidden={true}>
+							Price
+						</div>
+						<div className={styles.creditTitle} aria-hidden={true}>
+							Credit
+						</div>
 						<div className={styles.rateTitle}>
 							<a href="#ref" onClick={scrollToReview}>
 								{product.reviewCount}{" "}
@@ -121,6 +134,7 @@ export const Product = motion(
 							<Button
 								appearance="ghost"
 								arrow={isReviewOpened ? "down" : "right"}
+								aria-expanded={isReviewOpened}
 								onClick={() => setIsReviewOpened(!isReviewOpened)}>
 								Read reviews
 							</Button>
@@ -130,14 +144,18 @@ export const Product = motion(
 						variants={variants}
 						animate={isReviewOpened ? "visible" : "hidden"}
 						initial="hidden">
-						<Card color="blue" className={styles.reviews} ref={reviewRef}>
+						<Card
+							color="blue"
+							className={styles.reviews}
+							ref={reviewRef}
+							tabIndex={isReviewOpened ? 0 : -1}>
 							{product.reviews.map((review) => (
 								<div key={review._id}>
 									<Review review={review} />
 									<Devider />
 								</div>
 							))}
-							<ReviewForm productId={product._id} />
+							<ReviewForm isOpened={isReviewOpened} productId={product._id} />
 						</Card>
 					</motion.div>
 				</div>
