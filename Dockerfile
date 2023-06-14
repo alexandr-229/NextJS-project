@@ -1,9 +1,10 @@
 FROM node:20
 WORKDIR /
-RUN npm install -g npm@9.6.7
 ADD package.json package.json
-RUN npm install --force
+RUN npm install
 ADD . .
+ENV NODE_ENV production
 RUN npm run build
-RUN npm prune --production --force
+RUN npm prune --production
 CMD [ "npm", "run", "start" ]
+EXPOSE 3000
