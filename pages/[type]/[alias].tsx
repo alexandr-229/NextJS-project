@@ -1,6 +1,7 @@
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext } from "next";
 import { ParsedUrlQuery } from "querystring";
 import axios from "axios";
+import Head from "next/head";
 
 import { withLayout } from "@/layout/Layout";
 import { MenuItem } from "@/interfaces/menu.interface";
@@ -11,15 +12,23 @@ import { PageComponent } from "@/page-components";
 import { API } from "@/helpers/api";
 
 function Page({ page, products, firstCategory }: PageProps): JSX.Element {
-	if (!page) {
+	if (!page || !products) {
 		return <></>;
 	}
 	return (
-		<PageComponent
-			firstCategory={firstCategory}
-			page={page}
-			products={products}
-		/>
+		<>
+			<Head>
+				<title>{page.title}</title>
+				<meta name="description" content={page.category} />
+				<meta property="og:title" content={page.title} />
+				<meta property="og:type" content="article" />
+			</Head>
+			<PageComponent
+				firstCategory={firstCategory}
+				page={page}
+				products={products}
+			/>
+		</>
 	);
 }
 

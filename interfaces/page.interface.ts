@@ -13,8 +13,6 @@ export interface PageModel {
 	title: string;
 	category: string;
 	tagsTitle: string;
-	metaTitle: string;
-	metaDescription: string;
 	firstCategory: TopLevelCategory;
 	advantages?: IAdvantage[];
 	createdAt: Date;

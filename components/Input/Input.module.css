@@ -3,11 +3,13 @@
 }
 
 .input {
+	box-sizing: border-box;
 	padding: 7px 15px;
 
 	color: var(--black);
 	border: none;
 	border-radius: 5px;
+	outline: none;
 	background: var(--white);
 	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
 
@@ -15,8 +17,6 @@
 
 	font-size: 16px;
 	line-height: 22px;
-	outline: none;
-	box-sizing: border-box;
 }
 
 .input::placeholder {
@@ -24,18 +24,21 @@
 }
 
 .input:focus {
-	border: 3px solid var(--primary);
 	padding: 4px 12px;
+
+	border: 3px solid var(--primary);
 }
 
 .error {
-	border: 3px solid var(--red);
 	padding: 4px 12px;
+
+	border: 3px solid var(--red);
 }
 
 .errorMessage {
 	position: absolute;
 	bottom: -20px;
 	left: 0;
+
 	color: var(--red);
 }

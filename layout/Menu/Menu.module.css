@@ -1,18 +1,22 @@
 .firstLevel {
 	display: grid;
+	align-items: center;
+
+	margin-top: 20px;
+
+	cursor: pointer;
+
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 25px;
 	grid-template-columns: 24px 1fr;
 	gap: 20px;
-	align-items: center;
-	font-weight: 500;
-	font-size: 18px;
-	line-height: 25px;
-	margin-top: 20px;
-	cursor: pointer;
 }
 
 .firstLevelList {
-	list-style: none;
 	padding: 0;
+
+	list-style: none;
 }
 
 .firstLevelActive,
@@ -27,38 +31,49 @@
 
 .secondLevel {
 	margin-bottom: 10px;
+	padding: 0;
+
 	cursor: pointer;
 	text-transform: uppercase;
+
 	color: var(--gray-dark);
-	font-size: 12px;
-	outline-offset: -1px;
 	border: none;
+	outline-offset: -1px;
 	background: none;
-	padding: 0;
+
+	font-size: 12px;
 }
 
 .secondBlock {
+	margin-top: 15px;
 	margin-left: 12px;
 	padding: 0 0 0 32px;
-	margin-top: 15px;
-	border-left: 1px solid #dfdfdf;
+
 	list-style: none;
+
+	border-left: 1px solid #DFDFDF;
 }
 
 .secondLevelBlock {
 	overflow: hidden;
-	list-style: none;
+
 	padding: 0;
+
+	list-style: none;
 }
 
 .thirdLevel {
-	margin-bottom: 10px;
 	display: block;
+
+	margin-bottom: 10px;
+
 	cursor: pointer;
+
 	color: var(--gray-dark);
-	font-weight: 500;
-	font-size: 14px;
 	outline-offset: -1px;
+
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .thirdLevelActive,
@@ -67,8 +82,10 @@
 }
 
 .visualyHidden {
+	position: absolute;
+
+	overflow: hidden;
+
 	width: 0;
 	height: 0;
-	overflow: hidden;
-	position: absolute;
 }

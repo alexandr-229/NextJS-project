@@ -5,16 +5,19 @@
 .textarea {
 	width: 100%;
 	padding: 7px 15px;
+
+	resize: none;
+
 	color: var(--black);
 	border: none;
-	background: var(--white);
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
 	border-radius: 5px;
+	outline: none;
+	background: var(--white);
+	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
+
+	font-family: var(--font-family);
 	font-style: 16px;
 	line-height: 22px;
-	font-family: var(--font-family);
-	resize: none;
-	outline: none;
 }
 
 .textarea ::placeholder {
@@ -22,18 +25,21 @@
 }
 
 .textarea:focus {
-	border: 3px solid var(--primary);
 	padding: 4px 12px;
+
+	border: 3px solid var(--primary);
 }
 
 .error {
-	border: 3px solid var(--red);
 	padding: 4px 12px;
+
+	border: 3px solid var(--red);
 }
 
 .errorMessage {
 	position: absolute;
 	bottom: -20px;
 	left: 0;
+
 	color: var(--red);
 }
